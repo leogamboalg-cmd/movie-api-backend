@@ -5,6 +5,9 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const cors = require("cors");
+app.use(cors());
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -13,6 +16,11 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.get("/", (req, res) => {
   res.send("Movie API backend is running");
+});
+
+app.post("/addToFavorites",(req,res) => {
+	console.log(req.body);
+  	res.json({ message: "Login received" });
 });
 
 app.listen(PORT, () => {
